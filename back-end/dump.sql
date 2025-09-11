@@ -50,12 +50,13 @@ SET default_table_access_method = heap;
 CREATE TABLE public.cliente (
     telefone character varying NOT NULL,
     nomecliente character varying,
-    dataNascimento DATE,
-    rendaBrutaMensal NUMERIC,
+    dataNascimentoCliente DATE,
+    rendaBrutaCliente NUMERIC,
     quantidadeFilhos NUMERIC,
     anosCarteiraAssinada NUMERIC,
     teveSubsidio BOOLEAN,
-    vaiUsarFGTS BOOLEAN
+    vaiUsarFGTS BOOLEAN,
+    possuiFinanciamento BOOLEAN
 );
 
 

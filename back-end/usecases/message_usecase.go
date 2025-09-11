@@ -30,7 +30,7 @@ func (usecase MessageUseCases) Responder(telefone, conversation_id, mensagem str
 	if !config.Respondendo || mensagem == "" {
 		return nil
 	}
-	baseURL := "http://localhost:5678/webhook/92232d3b-f9c8-4525-827e-0aa9fe181e27jcChatolino"
+	baseURL := "http://localhost:5678/webhook/74fac712-b9a5-458e-8652-c8eedeee7837Figueiredo"
 	client := &http.Client{
 		Timeout: time.Second * 10,
 	}
@@ -63,7 +63,7 @@ func (usecase MessageUseCases) Responder(telefone, conversation_id, mensagem str
 }
 
 func EnviarMensagem(telefone, mensagem string) error {
-	baseURL := "http://localhost:5678/webhook/808f0e3b-8449-4d7b-8e33-bed687e3a64cricardo_Chatlino"
+	baseURL := "http://localhost:5678/webhook/04b06825-2c4d-471b-86cc-9b32ad6f9d8eFigueiredo"
 	client := &http.Client{
 		Timeout: time.Second * 10,
 	}

@@ -54,3 +54,11 @@ func (controller ClienteController) IsRoboLigado(c *gin.Context){
 	c.String(http.StatusOK, "false") // Robô está desligado
 }
 
+func (controller ClienteController) GetAllClientes(c *gin.Context){
+	clientes, err := controller.useCase.GetAllClientes()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error":err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, clientes)
+}

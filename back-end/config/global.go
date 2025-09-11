@@ -14,7 +14,7 @@ var Counter int
 
 const (
 	baseUrl     = "http://147.93.10.167:8012"
-	plano_atual = "bronze"
+	plano_atual = "ouro"
 )
 
 func GetPlanoAtual() int {
