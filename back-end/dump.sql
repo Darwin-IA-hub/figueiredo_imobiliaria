@@ -49,14 +49,14 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.cliente (
     telefone character varying NOT NULL,
-    nomecliente character varying,
-    dataNascimentoCliente DATE,
-    rendaBrutaCliente NUMERIC,
-    quantidadeFilhos NUMERIC,
-    anosCarteiraAssinada NUMERIC,
-    teveSubsidio BOOLEAN,
-    vaiUsarFGTS BOOLEAN,
-    possuiFinanciamento BOOLEAN
+    nomecliente character varying DEFAULT '' NOT NULL,
+    dataNascimentoCliente DATE DEFAULT CURRENT_DATE,
+    rendaBrutaCliente NUMERIC DEFAULT 0 NOT NULL,
+    quantidadeFilhos NUMERIC DEFAULT 0 NOT NULL,
+    anosCarteiraAssinada NUMERIC DEFAULT 0 NOT NULL,
+    teveSubsidio BOOLEAN DEFAULT false NOT NULL,
+    vaiUsarFGTS BOOLEAN DEFAULT false NOT NULL,
+    possuiFinanciamento BOOLEAN DEFAULT false NOT NULL
 );
 
 

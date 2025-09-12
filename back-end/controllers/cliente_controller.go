@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"back-end/models"
 	"back-end/usecases"
 	"database/sql"
 	"fmt"
@@ -61,4 +62,60 @@ func (controller ClienteController) GetAllClientes(c *gin.Context){
 		return
 	}
 	c.JSON(http.StatusOK, clientes)
+}
+
+func (controller ClienteController) CreateCliente(c *gin.Context){
+	var cliente models.Cliente
+	err := c.BindJSON(&cliente)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message":"nome ou telefone invalidos", "error":err.Error()})
+		return
+	}
+	err = controller.useCase.CreateCliente(cliente.Telefone, cliente.NomeCliente)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError,gin.H{"error":err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message":"cliente criado com sucesso", "cliente":cliente})
+}
+
+func (controller ClienteController) UpdateCliente(c *gin.Context){
+	telefone := c.Param("telefone")
+	var cliente models.Cliente
+	err := c.BindJSON(&cliente)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message":"inputs invalidos", "error":err.Error()})
+		return
+	}
+
+	cliente.Telefone = telefone
+
+	updatedCliente, err := controller.useCase.UpdateCliente(cliente)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error":err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, updatedCliente)
+}
+
+func (controller ClienteController) DeleteCliente(c *gin.Context){
+	telefone := c.Param("telefone")
+	err := controller.useCase.DeleteCliente(telefone)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error":err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, "cliente deletado com sucesso")
+}
+
+func (controller ClienteController) GetClienteByTelefone(c *gin.Context){
+	telefone := c.Param("telefone")
+	cliente, err := controller.useCase.GetClienteByTelefone(telefone)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error":err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, cliente)
 }

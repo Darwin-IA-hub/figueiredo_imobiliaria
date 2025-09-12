@@ -12,4 +12,8 @@ func SetupClienteRoutes(router *gin.Engine, clienteController controllers.Client
 	router.GET("/ligado/:telefone", clienteController.IsRoboLigado)
 
 	router.GET("/clientes", clienteController.GetAllClientes)
+	router.GET("/clientes/:telefone", clienteController.GetClienteByTelefone)
+	router.POST("/clientes",clienteController.CreateCliente)
+	router.PUT("/clientes/:telefone", clienteController.UpdateCliente)
+	router.DELETE("/clientes/:telefone", clienteController.DeleteCliente)
 }

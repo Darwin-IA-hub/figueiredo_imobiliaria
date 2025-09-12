@@ -42,3 +42,19 @@ func (usecase ClienteUseCases) DeleteClienteBloqueadoByID(idCliente string) erro
 func (usecase ClienteUseCases) GetAllClientes() ([]models.Cliente, error) {
 	return usecase.repository.GetAllClientes()
 }
+
+func (usecase ClienteUseCases) CreateCliente(telefone, nomeCliente string) error {
+	return usecase.repository.CreateCliente(telefone, nomeCliente)
+}
+
+func (usecase ClienteUseCases) UpdateCliente(cliente models.Cliente) (models.Cliente,error){
+	return usecase.repository.UpdateCliente(cliente)
+}
+
+func (usecase ClienteUseCases) DeleteCliente(telefone string) error {
+	return usecase.repository.DeleteCliente(telefone)
+}
+
+func (usecase ClienteUseCases) GetClienteByTelefone(telefone string) (models.Cliente, error){
+	return usecase.repository.GetClienteByTelefone(telefone)
+}

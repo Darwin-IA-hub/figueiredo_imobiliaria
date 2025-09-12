@@ -79,6 +79,11 @@ func main() {
 	routes.SetupContactRoutes(server, controllers.NewContactController(usecases.NewContactUseCases(repository.NewContactRepository(dbConnection))))
 	routes.SetupLeadRoutes(server, controllers.NewLeadController(usecases.NewLeadUseCases(repository.NewLeadRepository(dbConnection))))
 
+	routes.SetupFinanciamentoRoutes(server, controllers.NewFinanciamentoController(usecases.NewFinanciamentoUseCases(repository.NewFinanciamentoRepository(dbConnection))))
+	routes.SetupFotoRoutes(server, controllers.NewFotoController(usecases.NewFotoUseCases(repository.NewFotoRepository(dbConnection))))
+	routes.SetupImovelRoutes(server,controllers.NewImovelController(usecases.NewImovelUseCases(repository.NewImovelRepository(dbConnection))))
+	routes.SetupConjugeRoutes(server, controllers.NewConjugeController(usecases.NewConjugeUseCases(repository.NewConjugeRepository(dbConnection))))
+
 	port := server.Run(":3034")
 	fmt.Println("Servidor rodando na porta: ", port)
 }

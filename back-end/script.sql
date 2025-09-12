@@ -2,65 +2,65 @@
 
 CREATE TABLE Cliente (
     telefone TEXT PRIMARY KEY,
-    nomeCliente TEXT,
-    dataNascimentoCliente DATE,
-    rendaBrutaCliente NUMERIC,
-    quantidadeFilhos NUMERIC,
-    anosCarteiraAssinada NUMERIC,
-    teveSubsidio BOOLEAN,
-    vaiUsarFGTS BOOLEAN,
-    possuiFinanciamento BOOLEAN
+    nomeCliente TEXT DEFAULT '' NOT NULL,
+    dataNascimentoCliente DATE DEFAULT CURRENT_DATE,
+    rendaBrutaCliente NUMERIC DEFAULT 0 NOT NULL,
+    quantidadeFilhos NUMERIC DEFAULT 0 NOT NULL,
+    anosCarteiraAssinada NUMERIC DEFAULT 0 NOT NULL,
+    teveSubsidio BOOLEAN DEFAULT false NOT NULL,
+    vaiUsarFGTS BOOLEAN DEFAULT false NOT NULL,
+    possuiFinanciamento BOOLEAN DEFAULT false NOT NULL
 );
 
 CREATE TABLE Financiamento (
     idFinanciamento SERIAL PRIMARY KEY,
-    descricaoFinanciamento TEXT,
+    descricaoFinanciamento TEXT DEFAULT '' NOT NULL,
     fk_Cliente_telefone TEXT
 );
 
 CREATE TABLE Foto (
     idFoto SERIAL PRIMARY KEY,
-    linkFoto TEXT,
+    linkFoto TEXT DEFAULT '' NOT NULL,
     fk_Cliente_telefone TEXT
 );
 
 CREATE TABLE Imovel (
     idImovel SERIAL PRIMARY KEY,
-    tipoImovel TEXT,
-    linkIPTU TEXT,
-    cidadeImovel TEXT
+    tipoImovel TEXT DEFAULT '' NOT NULL,
+    linkIPTU TEXT DEFAULT '' NOT NULL,
+    cidadeImovel TEXT DEFAULT '' NOT NULL
 );
 
 CREATE TABLE Conjuge (
     idConjuge SERIAL PRIMARY KEY,
-    rendaBrutaMensalConjuge NUMERIC,
-    dataNascimentoConjuge DATE,
+    rendaBrutaMensalConjuge NUMERIC DEFAULT 0 NOT NULL,
+    dataNascimentoConjuge DATE DEFAULT CURRENT_DATE,
     fk_Cliente_telefone TEXT
 );
 
 CREATE TABLE Interesse (
     idInteresse SERIAL PRIMARY KEY,
-    interesseAtual TEXT,
-    cidadeInteresse TEXT,
-    intervaloPreco TEXT,
-    observacao TEXT,
-    tipoImovelInteresse TEXT,
-    fk_Cliente_telefone TEXT,
+    interesseAtual TEXT DEFAULT '' NOT NULL,
+    cidadeInteresse TEXT DEFAULT '' NOT NULL,
+    intervaloPreco TEXT  DEFAULT '' NOT NULL,
+    observacao TEXT DEFAULT '' NOT NULL,
+    tipoImovelInteresse TEXT DEFAULT '' NOT NULL,
+    fk_Cliente_telefone TEXT ,
     fk_Imovel_idImovel SERIAL,
     fk_Lancamento_idLancamento SERIAL
 );
 
 CREATE TABLE ImovelVenda (
     fk_Imovel_idImovel SERIAL PRIMARY KEY,
-    financiadoQuitado TEXT,
-    docEmDia BOOLEAN,
-    estaHabitado BOOLEAN
+    financiadoQuitado TEXT DEFAULT '' NOT NULL,
+    docEmDia BOOLEAN DEFAULT false NOT NULL,
+    estaHabitado BOOLEAN DEFAULT false NOT NULL
 );
 
 CREATE TABLE Lancamento (
     idLancamento SERIAL PRIMARY KEY,
-    cidadeLancamento TEXT,
-    nomeLancamento TEXT
+    cidadeLancamento TEXT DEFAULT '' NOT NULL,
+    nomeLancamento TEXT DEFAULT '' NOT NULL
 );
  
 ALTER TABLE Financiamento ADD CONSTRAINT FK_Financiamento_2

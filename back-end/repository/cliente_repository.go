@@ -6,8 +6,6 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-//"fmt"
-
 type ClienteRepository struct {
 	connection *sqlx.DB
 }
@@ -69,4 +67,54 @@ func (repo ClienteRepository) CreateCliente(telefone, nomeCliente string) error 
 		return err
 	}
 	return nil
+}
+
+func (repo ClienteRepository) UpdateCliente(cliente models.Cliente) (models.Cliente, error) {
+	query := `UPDATE cliente SET 
+				nomecliente = :nomecliente,
+				datanascimentocliente = :datanascimentocliente,
+				rendabrutacliente = :rendabrutacliente,
+				quantidadefilhos = :quantidadefilhos,
+				anoscarteiraassinada = :anoscarteiraassinada,
+				tevesubsidio = :tevesubsidio,
+				vaiusarfgts = :vaiusarfgts,
+				possuifinanciamento = :possuifinanciamento
+			  WHERE telefone = :telefone
+			  RETURNING *`
+
+	var updatedCliente models.Cliente
+	rows, err := repo.connection.NamedQuery(query, &cliente)
+	if err != nil {
+		return updatedCliente, err
+	}
+	defer rows.Close()
+
+	if rows.Next() {
+		err = rows.StructScan(&updatedCliente)
+		if err != nil {
+			return updatedCliente, err
+		}
+	}
+	return updatedCliente, nil
+}
+
+func (repo ClienteRepository) DeleteCliente(telefone string) error {
+	query := `DELETE FROM cliente WHERE telefone = $1;`
+
+	_, err := repo.connection.Exec(query, telefone)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (repo ClienteRepository) GetClienteByTelefone(telefone string) (models.Cliente, error){
+	query:=`SELECT * FROM cliente WHERE telefone = $1`
+
+	var cliente models.Cliente
+	err:=repo.connection.Get(&cliente,query,telefone)
+	if err != nil {
+		return cliente, err
+	}
+	return cliente,nil
 }
