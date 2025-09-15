@@ -16,5 +16,12 @@
   "typescript.suggest.autoImports": true,
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
-  "files.autoSave": "onFocusChange"
+  "files.autoSave": "onFocusChange",
+  "python-envs.pythonProjects": [
+    {
+      "path": "back-end/repository",
+      "envManager": "ms-python.python:venv",
+      "packageManager": "ms-python.python:pip"
+    }
+  ]
 }

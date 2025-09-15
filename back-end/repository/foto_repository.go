@@ -42,9 +42,16 @@ func (repo FotoRepository) CreateFoto(foto models.Foto) (int, error) {
 	query := `INSERT INTO foto(linkfoto, fk_cliente_telefone) VALUES(:linkfoto,:fk_cliente_telefone) 
 				RETURNING idfoto;`
 	var id int
-	err := repo.connection.QueryRow(query, foto.LinkFoto, foto.Fk_Cliente_telefone).Scan(&id)
+	rows, err := repo.connection.NamedQuery(query, foto)
 	if err != nil {
 		return 0, err
+	}
+	defer rows.Close()
+	if rows.Next() {
+		err = rows.Scan(&id)
+		if err != nil {
+			return 0, err
+		}
 	}
 	return id, nil
 }

@@ -46,12 +46,12 @@ CREATE TABLE Interesse (
     observacao TEXT DEFAULT '' NOT NULL,
     tipoImovelInteresse TEXT DEFAULT '' NOT NULL,
     fk_Cliente_telefone TEXT ,
-    fk_Imovel_idImovel SERIAL,
-    fk_Lancamento_idLancamento SERIAL
+    fk_Imovel_idImovel INTEGER,
+    fk_Lancamento_idLancamento INTEGER
 );
 
 CREATE TABLE ImovelVenda (
-    fk_Imovel_idImovel SERIAL PRIMARY KEY,
+    fk_Imovel_idImovel INTEGER PRIMARY KEY,
     financiadoQuitado TEXT DEFAULT '' NOT NULL,
     docEmDia BOOLEAN DEFAULT false NOT NULL,
     estaHabitado BOOLEAN DEFAULT false NOT NULL
