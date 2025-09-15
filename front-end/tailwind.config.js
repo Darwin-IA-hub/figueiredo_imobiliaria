@@ -10,9 +10,15 @@ export default {
         'primary-light': '#3b82f6',
         secondary: '#64748b',
         accent: '#f59e0b',
-        background: '#ffffff',
+        background: {
+          light: '#ffffff',
+          dark: '#121212',
+        },
         surface: '#f8fafc',
-        text: '#1e293b',
+        text: {
+          light: '#1e293b',
+          dark: '#f0f0f0',
+        },
         'text-light': '#64748b',
         border: '#e2e8f0',
         hover: '#f1f5f9',
