@@ -56,7 +56,7 @@ func (controller FinanciamentoController) CreateFinanciamento(c *gin.Context) {
 		return
 	}
 	financiamento.IdFinanciamento = id
-	c.JSON(http.StatusOK, financiamento.IdFinanciamento)
+	c.JSON(http.StatusOK, id)
 }
 
 func (controller FinanciamentoController) UpdateFinanciamento(c *gin.Context) {

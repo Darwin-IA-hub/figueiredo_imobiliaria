@@ -56,7 +56,7 @@ func (controller FotoController) CreateFoto(c *gin.Context) {
 		return
 	}
 	foto.IdFoto = id
-	c.JSON(http.StatusOK, foto.IdFoto)
+	c.JSON(http.StatusOK, id)
 }
 
 func (controller FotoController) UpdateFoto(c *gin.Context) {

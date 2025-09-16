@@ -133,7 +133,7 @@ func (controller ImovelController) CreateImovelVenda(c *gin.Context) {
 		return
 	}
 	imovelVenda.Fk_Imovel_idImovel = id
-	c.JSON(http.StatusOK, imovelVenda.Fk_Imovel_idImovel)
+	c.JSON(http.StatusOK, id)
 }
 
 func (controller ImovelController) UpdateImovelVenda(c *gin.Context) {

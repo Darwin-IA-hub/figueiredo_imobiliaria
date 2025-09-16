@@ -56,7 +56,7 @@ func (controller ConjugeController) CreateConjuge(c *gin.Context) {
 		return
 	}
 	conjuge.IdConjuge = id
-	c.JSON(http.StatusOK, conjuge.IdConjuge)
+	c.JSON(http.StatusOK, id)
 }
 
 func (controller ConjugeController) UpdateConjuge(c *gin.Context) {
