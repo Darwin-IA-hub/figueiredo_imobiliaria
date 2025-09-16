@@ -6,6 +6,12 @@
   padding-top: var(--navbar-height); /* Account for fixed navbar height */
 }
 
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -46,6 +52,11 @@
 main {
   position: relative;
   z-index: 1;
+}
+
+/* Let main grow to push footer to the bottom */
+main.container {
+  flex: 1 0 auto;
 }
 
 /* Responsive adjustments */
