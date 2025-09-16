@@ -58,6 +58,20 @@ func (repo ClienteRepository) GetAllClientes() ([]models.Cliente, error) {
 	return clientes, nil
 }
 
+func (repo ClienteRepository) ClienteExiste(telefoneCliente string) (bool, error) {
+	query := `SELECT * FROM cliente WHERE telefone = $1`
+
+	var cliente models.Cliente
+	err := repo.connection.Get(&cliente, query, telefoneCliente)
+	if err != nil {
+		return false, err
+	}
+	if len(cliente.Telefone) > 0 {
+		return true, nil
+	}
+	return false, nil
+}
+
 func (repo ClienteRepository) CreateCliente(telefone, nomeCliente string) error {
 	query := `INSERT INTO cliente(telefone, nomecliente) VALUES ($1,$2);`
 
@@ -108,13 +122,13 @@ func (repo ClienteRepository) DeleteCliente(telefone string) error {
 	return nil
 }
 
-func (repo ClienteRepository) GetClienteByTelefone(telefone string) (models.Cliente, error){
-	query:=`SELECT * FROM cliente WHERE telefone = $1`
+func (repo ClienteRepository) GetClienteByTelefone(telefone string) (models.Cliente, error) {
+	query := `SELECT * FROM cliente WHERE telefone = $1`
 
 	var cliente models.Cliente
-	err:=repo.connection.Get(&cliente,query,telefone)
+	err := repo.connection.Get(&cliente, query, telefone)
 	if err != nil {
 		return cliente, err
 	}
-	return cliente,nil
+	return cliente, nil
 }
