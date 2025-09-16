@@ -39,13 +39,13 @@ func (repo FinanciamentoRepository) GetFinanciamentoById(id int) (models.Financi
 }
 
 func (repo FinanciamentoRepository) CreateFinanciamento(telefoneCLiente, descricao string) (int, error) {
-	query := `INSERT INTO financiamento(descricaofinanciamento,fk_cliente_telefone) values($1, $2) 
-				RETUNRING idfinanciamento;`
+	query := `INSERT INTO financiamento(descricaofinanciamento,fk_cliente_telefone) VALUES($1, $2) 
+						RETURNING idfinanciamento;`
 
 	var id int
 	err := repo.connection.QueryRow(query, descricao, telefoneCLiente).Scan(&id)
 	if err != nil {
-		return 0,err
+		return 0, err
 	}
 	return id, nil
 }
@@ -64,7 +64,7 @@ func (repo FinanciamentoRepository) UpdateFinanciamento(financiamento models.Fin
 	}
 	defer rows.Close()
 
-	if rows.Next(){
+	if rows.Next() {
 		err = rows.StructScan(&updatedFinanciamento)
 		if err != nil {
 			return updatedFinanciamento, err
@@ -73,10 +73,10 @@ func (repo FinanciamentoRepository) UpdateFinanciamento(financiamento models.Fin
 	return updatedFinanciamento, nil
 }
 
-func (repo FinanciamentoRepository) DeleteFinanciamento(idFinanciamento int) (error){
+func (repo FinanciamentoRepository) DeleteFinanciamento(idFinanciamento int) error {
 	query := `DELETE FROM financiamento WHERE idfianciamento = $1;`
 
-	_, err:=repo.connection.Exec(query, idFinanciamento)
+	_, err := repo.connection.Exec(query, idFinanciamento)
 	if err != nil {
 		return err
 	}
