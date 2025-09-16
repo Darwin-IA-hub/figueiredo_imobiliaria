@@ -3,7 +3,7 @@ package models
 type Interesse struct {
 	IdInteresse                int    `db:"idinteresse" json:"idInteresse"`
 	InteresseAtual             string `db:"interesseatual" json:"fluxo_do_cliente"`
-	CidadeInteresse            string `db:"cidadeinteresse" json:"cidadeInteresse"`
+	CidadeInteresse            string `db:"cidadeinteresse" json:"cidade_de_interesse"`
 	IntervaloPreco             string `db:"intervalopreco" json:"preco_do_cliente"`
 	Observacao                 string `db:"observacao" json:"observacao"`
 	TipoImovelInteresse        string `db:"tipoimovelinteresse" json:"tipoImovelInteresse"`
