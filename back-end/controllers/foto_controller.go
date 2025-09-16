@@ -97,3 +97,20 @@ func (controller FotoController) DeleteFoto(c *gin.Context) {
 
 	c.JSON(http.StatusOK, "foto deletada com sucesso")
 }
+
+func (controller FotoController) PostFoto(c *gin.Context) {
+	telefoneCliente := c.Param("telefoneCliente")
+	var foto models.Foto
+	err := c.BindJSON(&foto)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "inputs invalidos", "error": err.Error()})
+		return
+	}
+	foto.Fk_Cliente_telefone = telefoneCliente
+	id, err := controller.useCases.PostFoto(foto)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, id)
+}
