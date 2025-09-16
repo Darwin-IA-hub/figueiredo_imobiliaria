@@ -1,17 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar/Navbar';
+import Footer from '@/components/layout/Footer/Footer';
+import Clients from '@/pages/Clients/Clients';
 import './App.css';
 import './index.css';
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         {/* Main Application Structure */}
         <Navbar />
 
         {/* Main Content */}
-        <main className="container">
+        <main className="container" style={{ flex: 1 }}>
           <Routes>
             <Route
               path="/"
@@ -37,15 +39,7 @@ function App() {
                 </div>
               }
             />
-            <Route
-              path="/clients"
-              element={
-                <div className="container">
-                  <h1>Clientes</h1>
-                  <p>Gerenciamento de clientes</p>
-                </div>
-              }
-            />
+            <Route path="/clients" element={<Clients />} />
             <Route
               path="/leads"
               element={
@@ -111,6 +105,9 @@ function App() {
             />
           </Routes>
         </main>
+        
+        {/* Footer */}
+        <Footer />
       </div>
     </Router>
   );

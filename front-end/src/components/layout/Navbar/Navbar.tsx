@@ -71,16 +71,16 @@ const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
           <Link
             to="/"
             className="navbar__logo-link"
-            aria-label="Figueiredo Imobiliária - Página inicial"
+            aria-label="Figueiredo Imóveis - Página inicial"
           >
             <img
-              src="/logo.png"
-              alt="Figueiredo Imobiliária"
+              src="/src/assets/logo.png"
+              alt="Figueiredo Imóveis"
               className="navbar__logo"
               width={40}
               height={40}
             />
-            <span className="navbar__brand-name">Figueiredo Imobiliária</span>
+            <span className="navbar__brand-name">Figueiredo Imóveis</span>
           </Link>
         </div>
 
@@ -225,8 +225,8 @@ const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
         >
           <div className="navbar__mobile-header">
             <img
-              src="/logo.png"
-              alt="Figueiredo Imobiliária"
+              src="/src/assets/logo.png"
+              alt="Figueiredo Imóveis"
               className="navbar__mobile-logo"
               width={32}
               height={32}
