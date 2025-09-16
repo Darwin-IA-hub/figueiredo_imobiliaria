@@ -56,7 +56,7 @@ func (controller ImovelController) CreateImovel(c *gin.Context) {
 		return
 	}
 	imovel.IdImovel = id
-	c.JSON(http.StatusOK, imovel)
+	c.JSON(http.StatusOK, id)
 }
 
 func (controller ImovelController) UpdateImovel(c *gin.Context) {
