@@ -2,6 +2,7 @@ package repository
 
 import (
 	"back-end/models"
+	"database/sql"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -64,7 +65,9 @@ func (repo ClienteRepository) ClienteExiste(telefoneCliente string) (bool, error
 	var cliente models.Cliente
 	err := repo.connection.Get(&cliente, query, telefoneCliente)
 	if err != nil {
-		return false, err
+		if err == sql.ErrNoRows {
+			return false, nil
+		}
 	}
 	if len(cliente.Telefone) > 0 {
 		return true, nil
