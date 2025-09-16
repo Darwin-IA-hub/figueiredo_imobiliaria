@@ -87,3 +87,21 @@ func (repo FotoRepository) DeleteFoto(idFoto int) error {
 	}
 	return nil
 }
+
+func (repo FotoRepository) PostFoto(foto models.Foto) (int, error) {
+	query := `INSERT INTO foto(linkfoto, fk_cliente_telefone) VALUES(:linkfoto,:fk_cliente_telefone) 
+						RETURNING idfoto;`
+	var id int
+	rows, err := repo.connection.NamedQuery(query, &foto)
+	if err != nil {
+		return 0, err
+	}
+	defer rows.Close()
+	if rows.Next() {
+		err = rows.Scan(&id)
+		if err != nil {
+			return 0, err
+		}
+	}
+	return id, nil
+}
