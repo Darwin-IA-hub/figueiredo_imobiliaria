@@ -1,19 +1,9 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  overflow-x: hidden;
-}
-
 .footer {
   background-color: #2c3e50;
   color: white;
   padding: 2rem 0 0;
-  margin: 0;
+  margin-top: auto;
   width: 100%;
-  position: relative;
-  left: 0;
-  right: 0;
 }
 
 .footer-content {
@@ -68,10 +58,9 @@ html, body {
 .footer-bottom {
   text-align: center;
   padding: 1.5rem 0;
-  margin: 2rem 0 0;
+  margin-top: 2rem;
   background-color: rgba(0, 0, 0, 0.2);
   font-size: 0.9rem;
-  width: 100%;
 }
 
 .footer-bottom p {
