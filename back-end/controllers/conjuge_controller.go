@@ -56,10 +56,10 @@ func (controller ConjugeController) CreateConjuge(c *gin.Context) {
 		return
 	}
 	conjuge.IdConjuge = id
-	c.JSON(http.StatusOK, conjuge)
+	c.JSON(http.StatusOK, conjuge.IdConjuge)
 }
 
-func (controller ConjugeController) UpdateConjuge(c *gin.Context){
+func (controller ConjugeController) UpdateConjuge(c *gin.Context) {
 	idConjuge := c.Param("idConjuge")
 	idConjugeInt, err := strconv.Atoi(idConjuge)
 	if err != nil {
@@ -73,7 +73,7 @@ func (controller ConjugeController) UpdateConjuge(c *gin.Context){
 		return
 	}
 	conjuge.IdConjuge = idConjugeInt
-	updatedConjuge, err:=controller.useCases.UpdateConjuge(conjuge)
+	updatedConjuge, err := controller.useCases.UpdateConjuge(conjuge)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -81,7 +81,7 @@ func (controller ConjugeController) UpdateConjuge(c *gin.Context){
 	c.JSON(http.StatusOK, updatedConjuge)
 }
 
-func (controller ConjugeController) DeleteConjuge(c *gin.Context){
+func (controller ConjugeController) DeleteConjuge(c *gin.Context) {
 	idConjuge := c.Param("idConjuge")
 	idConjugeInt, err := strconv.Atoi(idConjuge)
 	if err != nil {

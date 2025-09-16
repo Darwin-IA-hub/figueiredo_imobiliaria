@@ -56,42 +56,42 @@ func (controller FotoController) CreateFoto(c *gin.Context) {
 		return
 	}
 	foto.IdFoto = id
-	c.JSON(http.StatusOK, foto)
+	c.JSON(http.StatusOK, foto.IdFoto)
 }
 
-func (controller FotoController) UpdateFoto(c *gin.Context){
+func (controller FotoController) UpdateFoto(c *gin.Context) {
 	idFoto := c.Param("idFoto")
 	idFotoInt, err := strconv.Atoi(idFoto)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"message":"id deve ser um inteiro","error":err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"message": "id deve ser um inteiro", "error": err.Error()})
 		return
 	}
 	var foto models.Foto
 	err = c.BindJSON(&foto)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"message":"inputs invalidos", "error":err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"message": "inputs invalidos", "error": err.Error()})
 		return
 	}
 
 	foto.IdFoto = idFotoInt
 	updatedFoto, err := controller.useCases.UpdateFoto(foto)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error":err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, updatedFoto)
 }
 
-func (controller FotoController) DeleteFoto(c *gin.Context){
+func (controller FotoController) DeleteFoto(c *gin.Context) {
 	idFoto := c.Param("idFoto")
 	idFotoInt, err := strconv.Atoi(idFoto)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"message":"id deve ser um inteiro","error":err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"message": "id deve ser um inteiro", "error": err.Error()})
 		return
 	}
 	err = controller.useCases.DeleteFoto(idFotoInt)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error":err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 

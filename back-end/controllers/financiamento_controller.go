@@ -56,7 +56,7 @@ func (controller FinanciamentoController) CreateFinanciamento(c *gin.Context) {
 		return
 	}
 	financiamento.IdFinanciamento = id
-	c.JSON(http.StatusOK, gin.H{"message": "financiamento criado com sucesso", "financiamento": financiamento})
+	c.JSON(http.StatusOK, financiamento.IdFinanciamento)
 }
 
 func (controller FinanciamentoController) UpdateFinanciamento(c *gin.Context) {
@@ -70,29 +70,29 @@ func (controller FinanciamentoController) UpdateFinanciamento(c *gin.Context) {
 
 	idFinanciamentoInt, err := strconv.Atoi(idFinanciamento)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"message":"id invalido", "error":err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"message": "id invalido", "error": err.Error()})
 		return
 	}
 	financiamento.IdFinanciamento = idFinanciamentoInt
 
 	updatedFinanciamento, err := controller.useCases.UpdateFinanciamento(financiamento)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error":err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, updatedFinanciamento)
 }
 
-func (controller FinanciamentoController) DeleteFinanciamento(c *gin.Context){
+func (controller FinanciamentoController) DeleteFinanciamento(c *gin.Context) {
 	idFinanciamento := c.Param("idFinanciamento")
 	idFinanciamentoInt, err := strconv.Atoi(idFinanciamento)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"message":"id invalido", "error":err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"message": "id invalido", "error": err.Error()})
 		return
 	}
 	err = controller.useCases.DeleteFinanciamento(idFinanciamentoInt)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"message":"id invalido", "error":err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"message": "id invalido", "error": err.Error()})
 		return
 	}
 

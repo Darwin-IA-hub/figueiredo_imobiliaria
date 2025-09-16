@@ -133,7 +133,7 @@ func (controller ImovelController) CreateImovelVenda(c *gin.Context) {
 		return
 	}
 	imovelVenda.Fk_Imovel_idImovel = id
-	c.JSON(http.StatusOK, imovelVenda)
+	c.JSON(http.StatusOK, imovelVenda.Fk_Imovel_idImovel)
 }
 
 func (controller ImovelController) UpdateImovelVenda(c *gin.Context) {
@@ -155,17 +155,17 @@ func (controller ImovelController) UpdateImovelVenda(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK,updatedImovelVenda)
+	c.JSON(http.StatusOK, updatedImovelVenda)
 }
 
-func (controller ImovelController) DeleteImovelVenda(c *gin.Context){
+func (controller ImovelController) DeleteImovelVenda(c *gin.Context) {
 	idImovelVenda := c.Param("idImovelVenda")
 	idImovelVendaInt, err := strconv.Atoi(idImovelVenda)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "id invalido", "error": err.Error()})
 		return
 	}
-	err=controller.useCases.DeleteImovelVenda(idImovelVendaInt)
+	err = controller.useCases.DeleteImovelVenda(idImovelVendaInt)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
