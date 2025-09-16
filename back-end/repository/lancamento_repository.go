@@ -36,7 +36,7 @@ func (repo LancamentoRepository) GetLancamentoById(idLancamento int) (models.Lan
 	return lancamento, nil
 }
 func (repo LancamentoRepository) CreateLancamento(lancamento models.Lancamento) (int, error) {
-	query := `INSERT INTO lancamento(cidadelancamento, nomelancamento) VALUES(:cidadelancamento, :nomelancamento) 
+	query := `INSERT INTO lancamento(cidadelancamento, nomelancamento, detalhes) VALUES(:cidadelancamento, :nomelancamento, :detalhes) 
 						RETURNING idlancamento;`
 	var id int
 	rows, err := repo.connection.NamedQuery(query, lancamento)
@@ -55,7 +55,8 @@ func (repo LancamentoRepository) CreateLancamento(lancamento models.Lancamento) 
 func (repo LancamentoRepository) UpdateLancamento(lancamento models.Lancamento) (models.Lancamento, error) {
 	query := `UPDATE lancamento SET	
 							cidadelancamento = :cidadelancamento,
-							nomelancamento = :nomelancamento
+							nomelancamento = :nomelancamento,
+							detalhes = :detalhes
 					 	WHERE idlancamento = :idlancamento
 						RETURNING *;`
 	var updatedLancamento models.Lancamento

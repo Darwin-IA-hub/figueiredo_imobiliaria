@@ -88,7 +88,6 @@ func (repo ClienteRepository) CreateCliente(telefone, nomeCliente string) error 
 
 func (repo ClienteRepository) UpdateCliente(cliente models.Cliente) (models.Cliente, error) {
 	query := `UPDATE cliente SET 
-				nomecliente = :nomecliente,
 				datanascimentocliente = :datanascimentocliente,
 				rendabrutacliente = :rendabrutacliente,
 				quantidadefilhos = :quantidadefilhos,
