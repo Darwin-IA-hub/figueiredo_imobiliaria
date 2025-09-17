@@ -3,7 +3,9 @@ package controllers
 import (
 	"back-end/models"
 	"back-end/usecases"
+	"bytes"
 	"fmt"
+	"io"
 	"net/http"
 	"strconv"
 
@@ -48,6 +50,11 @@ func (controller ConjugeController) GetConjugeById(c *gin.Context) {
 }
 
 func (controller ConjugeController) CreateConjuge(c *gin.Context) {
+	body, _ := io.ReadAll(c.Request.Body)
+	fmt.Println("JSON recebido bruto:", string(body))
+
+	// como o body só pode ser lido uma vez, recria o reader:
+	c.Request.Body = io.NopCloser(bytes.NewBuffer(body))
 	var conjuge models.Conjuge
 	err := c.BindJSON(&conjuge)
 	if err != nil {
