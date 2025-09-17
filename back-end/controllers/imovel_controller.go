@@ -139,6 +139,7 @@ func (controller ImovelController) CreateImovelVenda(c *gin.Context) {
 	err := c.BindJSON(&imovelVenda)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "inputs invalidos", "error": err.Error()})
+		fmt.Println("recebido", imovelVenda)
 		fmt.Println(err.Error())
 		return
 	}
