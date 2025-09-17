@@ -3,8 +3,10 @@ package controllers
 import (
 	"back-end/models"
 	"back-end/usecases"
+	"bytes"
 	"database/sql"
 	"fmt"
+	"io"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -83,7 +85,12 @@ func (controller ClienteController) CreateCliente(c *gin.Context) {
 }
 
 func (controller ClienteController) UpdateCliente(c *gin.Context) {
-	telefone := c.Param("telefone")
+
+	body, _ := io.ReadAll(c.Request.Body)
+	fmt.Println("JSON recebido bruto:", string(body))
+
+	// como o body só pode ser lido uma vez, recria o reader:
+	c.Request.Body = io.NopCloser(bytes.NewBuffer(body))
 	var cliente models.Cliente
 	err := c.BindJSON(&cliente)
 	if err != nil {
@@ -91,8 +98,6 @@ func (controller ClienteController) UpdateCliente(c *gin.Context) {
 		fmt.Println(err.Error())
 		return
 	}
-
-	cliente.Telefone = telefone
 
 	updatedCliente, err := controller.useCase.UpdateCliente(cliente)
 	if err != nil {

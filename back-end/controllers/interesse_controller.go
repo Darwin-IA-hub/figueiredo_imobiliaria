@@ -3,9 +3,9 @@ package controllers
 import (
 	"back-end/models"
 	"back-end/usecases"
-	"bytes"
+
 	"fmt"
-	"io"
+
 	"net/http"
 	"strconv"
 
@@ -49,11 +49,6 @@ func (controller InteresseController) GetInteressesById(c *gin.Context) {
 }
 func (controller InteresseController) CreateInteresse(c *gin.Context) {
 	var interesse models.Interesse
-	body, _ := io.ReadAll(c.Request.Body)
-	fmt.Println("JSON recebido bruto:", string(body))
-
-	// como o body só pode ser lido uma vez, recria o reader:
-	c.Request.Body = io.NopCloser(bytes.NewBuffer(body))
 
 	err := c.BindJSON(&interesse)
 	if err != nil {
