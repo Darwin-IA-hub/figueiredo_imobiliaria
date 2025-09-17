@@ -97,3 +97,6 @@ ALTER TABLE ImovelVenda ADD CONSTRAINT FK_ImovelVenda_2
     FOREIGN KEY (fk_Imovel_idImovel)
     REFERENCES Imovel (idImovel)
     ON DELETE CASCADE;
+
+
+-- reset BD
