@@ -3,7 +3,9 @@ package controllers
 import (
 	"back-end/models"
 	"back-end/usecases"
+	"bytes"
 	"fmt"
+	"io"
 	"net/http"
 	"strconv"
 
@@ -136,10 +138,16 @@ func (controller ImovelController) GetImovelVendaById(c *gin.Context) {
 
 func (controller ImovelController) CreateImovelVenda(c *gin.Context) {
 	var imovelVenda models.ImovelVenda
+	body, _ := io.ReadAll(c.Request.Body)
+	fmt.Println("JSON recebido bruto:", string(body))
+
+	// como o body só pode ser lido uma vez, recria o reader:
+	c.Request.Body = io.NopCloser(bytes.NewBuffer(body))
+
 	err := c.BindJSON(&imovelVenda)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "inputs invalidos", "error": err.Error()})
-		fmt.Println("recebido", imovelVenda)
+		fmt.Println("tipo do erro: ", err)
 		fmt.Println(err.Error())
 		return
 	}
