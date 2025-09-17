@@ -4,33 +4,37 @@ import './Footer.css';
 const Footer: React.FC = () => {
   return (
     <footer className="footer">
-      <div className="footer-content">
-        <div className="footer-section">
-          <h3>Horário de Atendimento</h3>
-          <p>De segunda a Sexta-feira</p>
-          <p>Horário das 9h às 17h</p>
-          <p>Intervalo para almoço das 12h às 14h</p>
+      <div className="footer-container">
+        <div className="footer-brand">
+          <h2>Figueiredo Imobiliária</h2>
+          <p>Desde março de 1996 — quase 30 anos</p>
+          <p>Imóvel, moeda forte. Aceitamos sugestões de novo slogan.</p>
         </div>
 
-        <div className="footer-section">
-          <h3>Contato</h3>
-          <p>Site: <a href="https://figueiredoimoveis.com.br" target="_blank" rel="noopener noreferrer">figueiredoimoveis.com.br</a></p>
-          <p>E-mail: contato@figueiredoimoveis.com.br</p>
-          <p>Consultores: (15) 98151-7070</p>
-          <p>Fone da placa: (15) 98151-7070</p>
-        </div>
+        <div className="footer-content">
+          <div className="footer-section">
+            <h3>Consultores</h3>
+            <ul>
+              <li>Segunda a Sexta-feira</li>
+              <li>Horário: 9h às 17h</li>
+              <li>Intervalo: 12h às 14h</li>
+            </ul>
+          </div>
 
-        <div className="footer-section">
-          <h3>Endereço</h3>
-          <p>Av. Cel Firmo Vieira de Camargo, 825</p>
-          <p>Centro - Tatuí/SP</p>
-          <p>Desde março de 1996 - Há mais de 25 anos</p>
-        </div>
-      </div>
+          <div className="footer-section">
+            <h3>Contato</h3>
+            <ul>
+              <li>Site: <a href="https://figueiredoimoveis.com.br" target="_blank" rel="noreferrer">figueiredoimoveis.com.br</a></li>
+              <li>E-mail: <a href="mailto:Contato@figueiredoimoveis.com.br">Contato@figueiredoimoveis.com.br</a> <span>(confirmar com @Robison DJ?)</span></li>
+              <li>Telefone: <a href="tel:+5515981517070">15 98151-7070</a></li>
+            </ul>
+          </div>
 
-      <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} Figueiredo Imobiliária - Imóvel moeda forte</p>
-        <p>Atuamos em vendas de lançamentos, ajudando famílias a realizarem o sonho de adquirir seu imóvel para morar e investir.</p>
+          <div className="footer-section">
+            <h3>Sede</h3>
+            <p>Av. Cel. Firmo Vieira de Camargo, 825, Centro — Tatuí/SP</p>
+          </div>
+        </div>
       </div>
     </footer>
   );
