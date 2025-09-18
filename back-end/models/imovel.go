@@ -10,6 +10,6 @@ type Imovel struct {
 type ImovelVenda struct {
 	Fk_Imovel_idImovel int    `db:"fk_imovel_idimovel" json:"fk_imovel_idimovel"`
 	FinanciadoQuitado  string `db:"financiadoquitado" json:"financiado_quitado"`
-	DocEmDia           bool   `db:"docemdia" json:"documentacao_dia"`
-	EstaHabitado       bool   `db:"estahabitado" json:"local_habitado"`
+	DocEmDia           string   `db:"docemdia" json:"documentacao_dia"`
+	EstaHabitado       string   `db:"estahabitado" json:"local_habitado"`
 }
