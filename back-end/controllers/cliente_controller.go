@@ -75,6 +75,14 @@ func (controller ClienteController) CreateCliente(c *gin.Context) {
 		fmt.Println(err.Error())
 		return
 	}
+	if cliente.Telefone == ""{
+		c.JSON(http.StatusBadRequest, "telefone não pode ser vazio")
+		return
+	}
+	if cliente.NomeCliente == ""{
+		c.JSON(http.StatusBadRequest, "nome não pode ser vazio")
+		return
+	}
 	err = controller.useCase.CreateCliente(cliente.Telefone, cliente.NomeCliente)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
