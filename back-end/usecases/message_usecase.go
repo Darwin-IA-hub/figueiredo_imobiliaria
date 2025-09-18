@@ -182,4 +182,3 @@ func (usecase MessageUseCases) GetConversationIDByTelefone(telefone string) (str
 	}
 	return conversationId, nil
 }
-
