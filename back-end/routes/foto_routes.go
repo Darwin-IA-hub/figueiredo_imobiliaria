@@ -14,4 +14,6 @@ func SetupFotoRoutes(router *gin.Engine, fotoController controllers.FotoControll
 	router.DELETE("/fotos/:idFoto", fotoController.DeleteFoto)
 
 	router.POST("/link/nome/:telefoneCliente", fotoController.PostFoto)
+	router.POST("/foto/cliente/:telefoneCliente", fotoController.EnviarFotosClienteParaVendedor)
+
 }

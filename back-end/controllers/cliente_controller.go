@@ -3,8 +3,10 @@ package controllers
 import (
 	"back-end/models"
 	"back-end/usecases"
+	"bytes"
 	"database/sql"
 	"fmt"
+	"io"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -59,6 +61,7 @@ func (controller ClienteController) GetAllClientes(c *gin.Context) {
 	clientes, err := controller.useCase.GetAllClientes()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, clientes)
@@ -69,30 +72,37 @@ func (controller ClienteController) CreateCliente(c *gin.Context) {
 	err := c.BindJSON(&cliente)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "nome ou telefone invalidos", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	err = controller.useCase.CreateCliente(cliente.Telefone, cliente.NomeCliente)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "cliente criado com sucesso", "cliente": cliente})
 }
 
 func (controller ClienteController) UpdateCliente(c *gin.Context) {
-	telefone := c.Param("telefone")
+
+	body, _ := io.ReadAll(c.Request.Body)
+	fmt.Println("JSON recebido bruto:", string(body))
+
+	// como o body só pode ser lido uma vez, recria o reader:
+	c.Request.Body = io.NopCloser(bytes.NewBuffer(body))
 	var cliente models.Cliente
 	err := c.BindJSON(&cliente)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "inputs invalidos", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
-
-	cliente.Telefone = telefone
 
 	updatedCliente, err := controller.useCase.UpdateCliente(cliente)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 
@@ -104,6 +114,7 @@ func (controller ClienteController) DeleteCliente(c *gin.Context) {
 	err := controller.useCase.DeleteCliente(telefone)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 
@@ -115,6 +126,7 @@ func (controller ClienteController) GetClienteByTelefone(c *gin.Context) {
 	cliente, err := controller.useCase.GetClienteByTelefone(telefone)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, cliente)
@@ -125,6 +137,7 @@ func (controller ClienteController) ClienteExiste(c *gin.Context) {
 	existe, err := controller.useCase.ClienteExiste(telefone)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, existe)

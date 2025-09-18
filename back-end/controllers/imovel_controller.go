@@ -3,6 +3,9 @@ package controllers
 import (
 	"back-end/models"
 	"back-end/usecases"
+
+	"fmt"
+
 	"net/http"
 	"strconv"
 
@@ -23,6 +26,7 @@ func (controller ImovelController) GetAllImoveis(c *gin.Context) {
 	imoveis, err := controller.useCases.GetAllImoveis()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, imoveis)
@@ -33,11 +37,13 @@ func (controller ImovelController) GetImovelById(c *gin.Context) {
 	idImovelInt, err := strconv.Atoi(idImovel)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "id invalido", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	imovel, err := controller.useCases.GetImovelById(idImovelInt)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, imovel)
@@ -48,11 +54,13 @@ func (controller ImovelController) CreateImovel(c *gin.Context) {
 	err := c.BindJSON(&imovel)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "inputs invalidos", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	id, err := controller.useCases.CreateImovel(imovel)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	imovel.IdImovel = id
@@ -64,18 +72,21 @@ func (controller ImovelController) UpdateImovel(c *gin.Context) {
 	idImovelInt, err := strconv.Atoi(idImovel)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "id invalido", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	var imovel models.Imovel
 	err = c.BindJSON(&imovel)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "inputs invalidos", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	imovel.IdImovel = idImovelInt
 	updatedImovel, err := controller.useCases.UpdateImovel(imovel)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, updatedImovel)
@@ -86,11 +97,13 @@ func (controller ImovelController) DeleteImovel(c *gin.Context) {
 	idImovelInt, err := strconv.Atoi(idImovel)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "id invalido", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	err = controller.useCases.DeleteImovel(idImovelInt)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, "imovel deletado com sucesso")
@@ -100,6 +113,7 @@ func (controller ImovelController) GetAllImoveisVenda(c *gin.Context) {
 	imoveisVenda, err := controller.useCases.GetAllImoveisVenda()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, imoveisVenda)
@@ -110,11 +124,13 @@ func (controller ImovelController) GetImovelVendaById(c *gin.Context) {
 	idImovelVendaInt, err := strconv.Atoi(idImovelVenda)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "id invalido", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	imovel, err := controller.useCases.GetImovelById(idImovelVendaInt)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, imovel)
@@ -125,11 +141,14 @@ func (controller ImovelController) CreateImovelVenda(c *gin.Context) {
 	err := c.BindJSON(&imovelVenda)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "inputs invalidos", "error": err.Error()})
+		fmt.Println("tipo do erro: ", err)
+		fmt.Println(err.Error())
 		return
 	}
 	id, err := controller.useCases.CreateImovelVenda(imovelVenda)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	imovelVenda.Fk_Imovel_idImovel = id
@@ -141,18 +160,21 @@ func (controller ImovelController) UpdateImovelVenda(c *gin.Context) {
 	idImovelVendaInt, err := strconv.Atoi(idImovelVenda)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "id invalido", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	var imovelVenda models.ImovelVenda
 	err = c.BindJSON(&imovelVenda)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "inputs invalidos", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	imovelVenda.Fk_Imovel_idImovel = idImovelVendaInt
 	updatedImovelVenda, err := controller.useCases.UpdateImovelVenda(imovelVenda)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, updatedImovelVenda)
@@ -163,11 +185,13 @@ func (controller ImovelController) DeleteImovelVenda(c *gin.Context) {
 	idImovelVendaInt, err := strconv.Atoi(idImovelVenda)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "id invalido", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	err = controller.useCases.DeleteImovelVenda(idImovelVendaInt)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, "imovelVenda deletado com sucesso")

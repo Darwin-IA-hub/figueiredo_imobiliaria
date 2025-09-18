@@ -3,6 +3,7 @@ package controllers
 import (
 	"back-end/models"
 	"back-end/usecases"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -23,6 +24,7 @@ func (controller FinanciamentoController) GetAllFinanciamentos(c *gin.Context) {
 	financiamentos, err := controller.useCases.GetAllFinanciamentos()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, financiamentos)
@@ -33,11 +35,13 @@ func (controller FinanciamentoController) GetFinanciamentoById(c *gin.Context) {
 	idInt, err := strconv.Atoi(id)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "ID-FINANCIAMENTO deve ser um numero", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	financiamento, err := controller.useCases.GetFinanciamentoById(idInt)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, financiamento)
@@ -48,11 +52,13 @@ func (controller FinanciamentoController) CreateFinanciamento(c *gin.Context) {
 	err := c.BindJSON(&financiamento)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "telefone ou descricao invalido", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	id, err := controller.useCases.CreateFinanciamento(financiamento.Fk_Cliente_telefone, financiamento.DescricaoFinanciamento)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	financiamento.IdFinanciamento = id
@@ -65,12 +71,14 @@ func (controller FinanciamentoController) UpdateFinanciamento(c *gin.Context) {
 	err := c.BindJSON(&financiamento)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "inputs invalidos", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 
 	idFinanciamentoInt, err := strconv.Atoi(idFinanciamento)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "id invalido", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	financiamento.IdFinanciamento = idFinanciamentoInt
@@ -78,6 +86,7 @@ func (controller FinanciamentoController) UpdateFinanciamento(c *gin.Context) {
 	updatedFinanciamento, err := controller.useCases.UpdateFinanciamento(financiamento)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, updatedFinanciamento)
@@ -88,11 +97,13 @@ func (controller FinanciamentoController) DeleteFinanciamento(c *gin.Context) {
 	idFinanciamentoInt, err := strconv.Atoi(idFinanciamento)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "id invalido", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 	err = controller.useCases.DeleteFinanciamento(idFinanciamentoInt)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "id invalido", "error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 

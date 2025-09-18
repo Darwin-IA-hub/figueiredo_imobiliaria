@@ -10,25 +10,24 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
-type ContactController struct{
+type ContactController struct {
 	useCase usecases.ContactUseCases
 }
 
-func NewContactController(usecase usecases.ContactUseCases) ContactController{
+func NewContactController(usecase usecases.ContactUseCases) ContactController {
 	return ContactController{
 		useCase: usecase,
 	}
 }
 
-func (controller ContactController) InitializeContact(c *gin.Context){
+func (controller ContactController) InitializeContact(c *gin.Context) {
 	var contact models.Contact
 	//var verCont models.Contact
 
 	err := c.BindJSON(&contact)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Formato inválido.", "error": err.Error()})
-		return 
+		return
 	}
 
 	if contact.Telefone == "status" {
@@ -36,31 +35,31 @@ func (controller ContactController) InitializeContact(c *gin.Context){
 		return
 	}
 
-	count,err := controller.useCase.GetCountContatosAtivos()
+	count, err := controller.useCase.GetCountContatosAtivos()
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"message":"Erro ao contar contatos ativos", "error":err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Erro ao contar contatos ativos", "error": err.Error()})
 		return
 	}
 
 	verCont, err := controller.useCase.GetContatoByTelefone(contact.Telefone)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			if count >= config.GetPlanoAtual(){
-				c.JSON(http.StatusForbidden, gin.H{"message":"Erro limite de plano excedido", "error":err.Error()})
+			if count >= config.GetPlanoAtual() {
+				c.JSON(http.StatusForbidden, gin.H{"message": "Erro limite de plano excedido", "error": err.Error()})
 				return
 			}
 			err = controller.useCase.CreateContato(contact.Nome, contact.Telefone)
 			if err != nil {
-				c.JSON(http.StatusBadRequest, gin.H{"error":err.Error()})
+				c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 				return
 			}
 			c.String(http.StatusCreated, "novo")
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"error":err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	
+
 	conversationID := "NULL"
 	if verCont.ConversationID.Valid {
 		conversationID = verCont.ConversationID.String
@@ -69,7 +68,7 @@ func (controller ContactController) InitializeContact(c *gin.Context){
 
 }
 
-func (controller ContactController) SetConversation(c *gin.Context){
+func (controller ContactController) SetConversation(c *gin.Context) {
 	var mold models.ContactSetMold
 	if err := c.BindJSON(&mold); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Formato inválido.", "error": err.Error()})
@@ -78,9 +77,8 @@ func (controller ContactController) SetConversation(c *gin.Context){
 
 	err := controller.useCase.SetConversationID(mold.ConversationID, mold.Telefone)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error":err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	c.String(http.StatusOK, "Sucesso!")
 }
-
