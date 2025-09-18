@@ -127,3 +127,14 @@ func (controller FotoController) PostFoto(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, id)
 }
+
+func (controller FotoController) EnviarFotosClienteParaVendedor(c *gin.Context) {
+	telefoneCliente := c.Param("telefoneCliente")
+	err := controller.useCases.EnviarFotosClienteParaVendedor(telefoneCliente)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, "fotos enviadas")
+}

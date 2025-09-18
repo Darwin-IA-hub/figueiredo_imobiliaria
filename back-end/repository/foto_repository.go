@@ -105,3 +105,13 @@ func (repo FotoRepository) PostFoto(foto models.Foto) (int, error) {
 	}
 	return id, nil
 }
+
+func (repo FotoRepository) GetFotosByTelefone(telefone string) ([]models.Foto, error) {
+	query := `SELECT * FROM foto WHERE fk_cliente_telefone = $1;`
+	var fotos []models.Foto
+	err := repo.connection.Select(&fotos, query, telefone)
+	if err != nil {
+		return nil, err
+	}
+	return fotos, nil
+}
