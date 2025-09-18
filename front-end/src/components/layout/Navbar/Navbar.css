@@ -65,6 +65,23 @@
   --z-tooltip: 1050;
 }
 
+/* Dark mode styles for the navbar design system */
+.dark {
+  /* Color Palette - Dark Mode */
+  --color-primary: #60a5fa;
+  --color-primary-dark: #3b82f6;
+  --color-primary-light: #93c5fd;
+  --color-secondary: #94a3b8;
+  --color-accent: #fbbf24;
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-text: #f1f5f9;
+  --color-text-light: #94a3b8;
+  --color-border: #334155;
+  --color-hover: #334155;
+  --color-overlay: rgba(0, 0, 0, 0.7);
+}
+
 /* Reset and Base Styles */
 .navbar {
   position: fixed;
@@ -484,6 +501,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: var(--spacing-xl);
 }
 
 .navbar__theme-toggle:hover,
@@ -583,6 +601,7 @@
   font-weight: var(--font-weight-medium);
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
+  margin-left: var(--spacing-lg);
 }
 
 .navbar__login-link:hover,

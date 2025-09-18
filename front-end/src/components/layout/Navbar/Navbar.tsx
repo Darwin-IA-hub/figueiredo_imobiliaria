@@ -3,15 +3,16 @@ import { Link, useLocation } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { NAV_ITEMS, NavbarProps } from './Navbar.types';
 import { useAuth } from '../../../hooks/useAuth';
+import { useTheme } from '../../../contexts/ThemeContext';
 import './Navbar.css';
 
 const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const location = useLocation();
   const { user, logout } = useAuth();
+  const { isDarkMode, toggleTheme } = useTheme();
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -31,12 +32,6 @@ const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
   const toggleUserDropdown = () => {
     setUserDropdownOpen(!userDropdownOpen);
     setActiveDropdown(null);
-  };
-
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    // Implement theme switching logic here
-    document.documentElement.classList.toggle('dark');
   };
 
   const handleLogout = () => {
@@ -194,6 +189,9 @@ const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
             </div>
           ) : (
             <Link to="/login" className="navbar__login-link">
+              <span className="navbar__icon">
+                <Icon icon="line-md:log-in" width="18" height="18" />
+              </span>
               Entrar
             </Link>
           )}

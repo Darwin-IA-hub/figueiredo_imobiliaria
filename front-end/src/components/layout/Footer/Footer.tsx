@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
         <div className="footer-brand">
           <h2>Figueiredo Imobiliária</h2>
           <p>Desde março de 1996 — quase 30 anos</p>
-          <p>Imóvel, moeda forte. Aceitamos sugestões de novo slogan.</p>
+          <p>Imóvel, moeda forte.</p>
         </div>
 
         <div className="footer-content">
@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
             <h3>Contato</h3>
             <ul>
               <li>Site: <a href="https://figueiredoimoveis.com.br" target="_blank" rel="noreferrer">figueiredoimoveis.com.br</a></li>
-              <li>E-mail: <a href="mailto:Contato@figueiredoimoveis.com.br">Contato@figueiredoimoveis.com.br</a> <span>(confirmar com @Robison DJ?)</span></li>
+              <li>E-mail: <a href="mailto:Contato@figueiredoimoveis.com.br">Contato@figueiredoimoveis.com.br</a></li>
               <li>Telefone: <a href="tel:+5515981517070">15 98151-7070</a></li>
             </ul>
           </div>

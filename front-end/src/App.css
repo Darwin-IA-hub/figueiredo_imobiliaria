@@ -4,12 +4,18 @@
   padding: 2rem;
   text-align: center;
   padding-top: var(--navbar-height); /* Account for fixed navbar height */
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .App {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .logo {
@@ -52,11 +58,17 @@
 main {
   position: relative;
   z-index: 1;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 /* Let main grow to push footer to the bottom */
 main.container {
   flex: 1 0 auto;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 /* Responsive adjustments */

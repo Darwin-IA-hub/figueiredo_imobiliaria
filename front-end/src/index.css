@@ -32,6 +32,13 @@
   --btn-primary-hover: #535bf2;
   --btn-border-radius: 8px;
   --transition-speed: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Global color variables for dark mode compatibility */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #333333;
+  --text-secondary: #6b7280;
+  --border-color: #e2e8f0;
 }
 
 html {
@@ -52,14 +59,15 @@ body {
     'Helvetica Neue',
     sans-serif;
   line-height: 1.6;
-  color: #333;
-  background-color: #f8f9fa;
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
   padding-top: var(--navbar-height); /* Account for fixed navbar */
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 a {
@@ -96,10 +104,36 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-/* Modern scrollbar styling */
+/* Modern scrollbar styling for all browsers */
+/* Firefox scrollbar styling - Light mode (default) */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #646cff #f1f1f1;
+  scrollbar-color: var(--text-secondary) var(--bg-primary);
+}
+
+/* WebKit scrollbar styling - Light mode (default) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-secondary);
+  border-radius: 6px;
+  border: 2px solid var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #646cff;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--bg-primary);
 }
 
 /* Focus styles for accessibility */
@@ -108,12 +142,15 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-/* Container */
+/* Container styles for dark mode compatibility */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   min-height: calc(100vh - 64px);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 @media (prefers-color-scheme: light) {
@@ -142,3 +179,72 @@ button:focus-visible {
     --navbar-text: #e0e0e0;
   }
 }
+
+/* Dark mode styles */
+.dark {
+  /* Global color variables for dark mode */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+
+  /* Navbar variables for dark mode */
+  --navbar-bg: #0f172a;
+  --navbar-text: #f1f5f9;
+
+  /* Button colors for dark mode */
+  --btn-primary: #60a5fa;
+  --btn-primary-hover: #3b82f6;
+}
+
+.dark a {
+  color: var(--btn-primary);
+}
+
+.dark a:hover {
+  color: var(--btn-primary-hover);
+}
+
+.dark button {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.dark button:hover {
+  border-color: var(--btn-primary);
+}
+
+/* Dark mode scrollbar styling */
+/* Firefox scrollbar styling - Dark mode */
+.dark * {
+  scrollbar-color: var(--text-secondary) var(--bg-primary);
+}
+
+/* WebKit scrollbar styling - Dark mode */
+.dark ::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+  border-radius: 6px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--text-secondary);
+  border-radius: 6px;
+  border: 2px solid var(--bg-primary);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--btn-primary);
+}
+
+.dark ::-webkit-scrollbar-corner {
+  background: var(--bg-primary);
+}
+
+/* Container styles for dark mode compatibility */

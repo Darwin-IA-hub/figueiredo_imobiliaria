@@ -42,6 +42,6 @@ export const NAV_ITEMS: NavItem[] = [
     id: 'financing',
     label: 'Financiamentos',
     href: '/financing',
-    icon: 'line-md:coin-twotone',
+    icon: 'line-md:clipboard-minus',
   },
 ];

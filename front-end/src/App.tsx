@@ -2,19 +2,21 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar/Navbar';
 import Clients from '@/pages/Clients/Clients';
 import Footer from '@/components/layout/Footer/Footer';
+import { ThemeProvider } from './contexts/ThemeContext';
 import './App.css';
 import './index.css';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        {/* Main Application Structure */}
-        <Navbar />
+    <ThemeProvider>
+      <Router>
+        <div className="App">
+          {/* Main Application Structure */}
+          <Navbar />
 
-        {/* Main Content */}
-        <main className="container">
-          <Routes>
+          {/* Main Content */}
+          <main className="container">
+            <Routes>
             <Route
               path="/"
               element={
@@ -108,6 +110,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 

@@ -1,13 +1,13 @@
 .client-card {
-  background: white;
+  background: var(--bg-primary);
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: all 0.3s ease;
-  border-left: 4px solid #4a90e2;
   margin-bottom: 16px;
   cursor: pointer;
   position: relative;
+  border: 1px solid var(--border-color);
 }
 
 .client-card:hover {
@@ -21,8 +21,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #e9ecef;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .client-name-status {
@@ -35,7 +35,7 @@
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .status-badge {
@@ -75,7 +75,7 @@
 .icon-button {
   background: none;
   border: none;
-  color: #6c757d;
+  color: var(--text-secondary);
   cursor: pointer;
   padding: 4px;
   border-radius: 4px;
@@ -86,14 +86,14 @@
 }
 
 .icon-button:hover {
-  background-color: #e9ecef;
-  color: #495057;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .expand-button {
   background: none;
   border: none;
-  color: #6c757d;
+  color: var(--text-secondary);
   cursor: pointer;
   padding: 4px;
   display: flex;
@@ -122,7 +122,7 @@
 }
 
 .info-icon {
-  color: #6c757d;
+  color: var(--text-secondary);
   display: flex;
   align-items: center;
   font-size: 1.1rem;
@@ -135,26 +135,26 @@
 
 .info-label {
   font-size: 0.75rem;
-  color: #6c757d;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .info-value {
   font-size: 0.9rem;
-  color: #212529;
+  color: var(--text-primary);
   font-weight: 500;
   word-break: break-word;
 }
 
 .phone-link {
-  color: #1976d2;
+  color: var(--btn-primary);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .phone-link:hover {
-  color: #0d47a1;
+  color: var(--btn-primary-hover);
   text-decoration: underline;
 }
 
@@ -163,7 +163,7 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease-out;
-  background-color: #f8f9fa;
+  background-color: var(--bg-secondary);
 }
 
 .expandable-section.expanded {
@@ -178,11 +178,11 @@
 /* Secondary Info */
 .secondary-info h4 {
   margin: 0 0 16px;
-  color: #495057;
+  color: var(--text-primary);
   font-size: 1rem;
   font-weight: 600;
   padding-bottom: 8px;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .info-grid {
@@ -196,19 +196,19 @@
 .notes-section {
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid var(--border-color);
 }
 
 .notes-section h5 {
   margin: 0 0 8px;
-  color: #495057;
+  color: var(--text-primary);
   font-size: 0.9rem;
   font-weight: 600;
 }
 
 .notes-content {
   margin: 0;
-  color: #495057;
+  color: var(--text-primary);
   font-size: 0.9rem;
   line-height: 1.5;
   white-space: pre-line;
